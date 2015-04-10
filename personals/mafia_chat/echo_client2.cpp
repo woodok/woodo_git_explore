@@ -14,7 +14,7 @@
 
 #define BUF_SIZE 1024
 
-void error_handling(char * message);
+void error_handling(const char * message);
 
 int main(int argc, char * argv[])
 {
@@ -68,7 +68,7 @@ int main(int argc, char * argv[])
 	return 0;
 }
 
-void error_handling(char * message)
+void error_handling(const char * message)
 {
 	fputs(message, stderr);
 	fputc('\n', stderr);
