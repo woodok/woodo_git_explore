@@ -13,7 +13,7 @@
 #include <sys/socket.h>
 #include <sys/epoll.h>
 
-#define BUF_SIZE 1000
+#define BUF_SIZE 4
 #define EPOLL_SIZE 50
 
 void error_handling(char * buf);
