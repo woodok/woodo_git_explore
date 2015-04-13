@@ -13,10 +13,10 @@
 #include <sys/socket.h>
 #include <sys/epoll.h>
 
-#define BUF_SIZE 4
+#define BUF_SIZE 100
 #define EPOLL_SIZE 50
 
-void error_handling(char * buf);
+void error_handling(const char * buf);
 
 int main(int argc, char * argv[])
 {
@@ -40,7 +40,7 @@ int main(int argc, char * argv[])
 	memset(&serv_adr, 0, sizeof(serv_adr));
 	serv_adr.sin_family = AF_INET;
 	serv_adr.sin_addr.s_addr = htonl(INADDR_ANY);
-	serv_adr.sin_port = htonl(atoi(argv[1]));
+	serv_adr.sin_port = htons(atoi(argv[1]));
 	if( bind(lstn_sock, (struct sockaddr *)&serv_adr, sizeof(serv_adr)) == -1)
 		error_handling("bind() error");
 
@@ -97,7 +97,7 @@ int main(int argc, char * argv[])
 	return 0;
 }
 
-void error_handling(char * buf)
+void error_handling(const char * buf)
 {
 	fputs(buf, stderr);
 	fputc('\n', stderr);
