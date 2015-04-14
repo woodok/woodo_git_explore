@@ -14,7 +14,7 @@
 
 #define BUF_SIZE 1024
 
-void error_handling(char * message);
+void error_handling(const char * message);
 
 int main(int argc, char * argv[])
 {
@@ -23,7 +23,7 @@ int main(int argc, char * argv[])
 	int str_len, recv_len, recv_cnt;
 	struct sockaddr_in serv_adr;
 
-	if(argv != 3) {
+	if(argc != 3) {
 		printf("Usage : %s <IP> <port>\n", argv[0]);
 		exit(1);
 	}
@@ -68,7 +68,7 @@ int main(int argc, char * argv[])
 	return 0;
 }
 
-void error_handling(char * message)
+void error_handling(const char * message)
 {
 	fputs(message, stderr);
 	fputc('\n', stderr);
