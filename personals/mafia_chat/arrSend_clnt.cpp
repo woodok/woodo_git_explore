@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
+#include "myheader.h"
 
 #define MAX_BUF 1000
 
@@ -20,8 +21,11 @@ int main(int argc, char * argv[])
 {
 	int sock;
 	struct sockaddr_in serv_adr;
-	void buf[MAX_BUF];
+	char buf[MAX_BUF];
 	int count;
+	int totallen, recvlen;
+
+	memset(buf, 0, MAX_BUF);
 
 	if(argc != 3)
 	{
@@ -44,10 +48,19 @@ int main(int argc, char * argv[])
 		puts("connected...........");
 
 	read(sock, &count, sizeof(int));
-	read(sock, buf, MAX_BUF);
+	totallen = 0;
+	while(totallen < count*sizeof(int))
+	{
+		recvlen = read(sock, &buf, MAX_BUF);
+		totallen += recvlen;
+	}
 
 	for(int i=0; i<count; ++i)
 		printf("%d ", ((int *)buf)[i]);
+	printf("\n");
+
+	print_binary((int*)&buf, count, sizeof(int));
+	print_binaryc((char *)&buf, count, sizeof(int));
 
 	close(sock);
 
