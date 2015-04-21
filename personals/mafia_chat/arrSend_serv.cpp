@@ -29,7 +29,6 @@ int main(int argc, char * argv[])
 	socklen_t clnt_adr_sz;
 	int lstn_sock, clnt_sock;
 	int count = COUNT;
-	int buf[COUNT];
 	char * bufc;
 
 	if(argc != 2)
